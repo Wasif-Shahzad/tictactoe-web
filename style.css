@@ -24,11 +24,11 @@
 }
 .large-container h1.friend{
     color: #ffffff;
-    border-bottom: 2px solid aqua;
+    border-bottom: 4px solid aqua;
 }
 .large-container h1.enemy{
     color: #2e2e2e;
-    border-bottom: 2px solid #F87398;
+    border-bottom: 4px solid #F87398;
 }
 .container {
     height: 200px;
@@ -36,7 +36,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
-    grid-gap: 3px;
+    grid-gap: 4px;
 }
 .container.friend{
     background-color: aqua;
