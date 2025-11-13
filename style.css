@@ -2,9 +2,9 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Stack Sans Headline', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 .large-container {
-    font-family: 'Stack Sans Headline', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -66,4 +66,78 @@
     transition: background-color 500ms ease-in,
     color 500ms ease-in,
     border-bottom 500ms ease-in;
+}
+
+.alert-screen {
+    position: fixed;
+    display: none;
+    height: 100vh;
+    width: 100vw;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.alert-container {
+    height: 200px;
+    width: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 10px;
+    gap: 30px;
+    transform: scale(0);
+    transition: transform 200ms ease-in;
+}
+
+.alert-container.active {
+    transform: scale(1);
+}
+
+.alert-container p {
+    font-size: 30px;
+    font-weight: 600;
+}
+.alert-container .alert-btn {
+    padding: 10px 20px;
+    font-size: 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 300;
+}
+.alert-container.neutral {
+    background-color: #A9A9A9;
+}
+
+.alert-container.neutral p {
+    color: black;
+    border-bottom: 2px solid black;
+}
+
+.alert-container .alert-btn.neutral {
+    background-color: #eee;
+    color: black;
+}
+
+.alert-container.friend {
+    background-color: #14BDAC;
+}
+
+.alert-container.friend p {
+    color: #eee;
+    border-bottom: 2px solid aqua;
+}
+
+.alert-container.enemy {
+    background-color: #EB2F64;
+}
+
+.alert-container.enemy p {
+    color: #2e2e2e;
+    border-bottom: 2px solid #F87398;
 }

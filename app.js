@@ -33,10 +33,77 @@ function constructMatrix() {
     return game;
 }
 
+function checkLine(a, b, c) {
+    if(a == b && b == c) {
+        return a;
+    } else {
+        return 2;
+    }
+}
+
+function movesAvailable(state) {
+    for(let i = 0; i < 3; i++) {
+        for(let j = 0; j < 3; j++) {
+            if(state[i][j] == 0) return true;
+        }
+    }
+    return false;
+}
+
 function checkWin() {
     // get the state of the game
     let game = constructMatrix();
-    console.log(game)
+    for(let i = 0; i < 3; i++) {
+        let row = checkLine(game[i][0], game[i][1], game[i][2]);
+        if(Math.abs(row) == 1) {
+            return row;
+        }
+        let col = checkLine(game[0][i], game[1][i], game[2][i]);
+        if(Math.abs(col) == 1) {
+            return col;
+        }
+    }
+    let diag = checkLine(game[0][0], game[1][1], game[2][2]);
+    if(Math.abs(diag) == 1) {
+        return diag;
+    }
+    diag = checkLine(game[0][2], game[1][1], game[2][0]);
+    if(Math.abs(diag) == 1) {
+        return diag;
+    }
+    if(movesAvailable(game)) {
+        return 2;
+    } else {
+        return 0;
+    }
+}
+
+function showResult(result) {
+    let newClass = "neutral";
+    if(result == 1) {
+        newClass = "friend";
+    } else if(result == -1) {
+        newClass = "enemy";
+    }
+    const alertScreen = document.querySelector('.alert-container');
+    alertScreen.classList.add(newClass);
+    const alertText = alertScreen.firstElementChild;
+
+    if(newClass == "neutral") {
+        alertText.textContent = "Draw!";
+    } else if(newClass == "friend") {
+        alertText.textContent = "Blue Won!";
+    } else {
+        alertText.textContent = "Red Won!";
+    }
+    const button = document.querySelector('.alert-btn');
+    button.classList.add(newClass);
+    
+    alertScreen.parentElement.style.display = "flex";
+    setTimeout(() => alertScreen.classList.add('active'), 0);
+    button.addEventListener("click", () => {
+        window.location.reload();
+    }, {once: true});
 }
 
 function toggle(event) {
@@ -50,7 +117,13 @@ function toggle(event) {
     clickedCell.classList.remove('empty')
 
     // check if the game has reached a result
-    
+    const res = checkWin();
+    if(res != 2) {
+        setTimeout(() => {
+            showResult(res);
+        }, 250);
+        return;
+    }
 
     // update the theme
     const wasFriend = outer_container.classList.contains('friend');
@@ -87,6 +160,6 @@ function toggle(event) {
 
 cells.forEach(cell => {
     if(cell.classList.contains('empty')) {
-        cell.addEventListener("click", toggle)
+        cell.addEventListener("click", toggle, {once: true})
     }
 })
