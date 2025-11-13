@@ -85,6 +85,7 @@ function showResult(result) {
     } else if(result == -1) {
         newClass = "enemy";
     }
+
     const alertScreen = document.querySelector('.alert-container');
     alertScreen.classList.add(newClass);
     const alertText = alertScreen.firstElementChild;
@@ -99,8 +100,7 @@ function showResult(result) {
     const button = document.querySelector('.alert-btn');
     button.classList.add(newClass);
     
-    alertScreen.parentElement.style.display = "flex";
-    setTimeout(() => alertScreen.classList.add('active'), 0);
+    setTimeout(() => alertScreen.parentElement.classList.add('active'), 0);
     button.addEventListener("click", () => {
         window.location.reload();
     }, {once: true});
