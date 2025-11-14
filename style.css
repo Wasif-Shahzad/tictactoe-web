@@ -80,7 +80,7 @@
     left: 0;
     transform: scale(0);
     opacity: 0;
-    transition: transform 70ms ease, opacity 70ms ease;
+    transition: transform 200ms cubic-bezier(.4,0,.2,1), opacity 200ms cubic-bezier(.4,0,.2,1);
     background: rgba(0, 0, 0, 0.7);
 }
 
@@ -98,6 +98,10 @@
 .alert-screen.active {
     transform: scale(1);
     opacity: 1;
+}
+
+.alert-container, .alert-screen {
+    will-change: transform, opacity;
 }
 
 .alert-container p {

@@ -78,6 +78,15 @@ function checkWin() {
     }
 }
 
+function showModal(modalElement) {
+    modalElement.style.display = 'flex'; // Ensure it's not display: none
+    // Force reflow before animating
+    void modalElement.offsetWidth;
+    requestAnimationFrame(() => {
+        modalElement.classList.add('active');
+    });
+}
+
 function showResult(result) {
     let newClass = "neutral";
     if(result == 1) {
@@ -99,11 +108,14 @@ function showResult(result) {
     }
     const button = document.querySelector('.alert-btn');
     button.classList.add(newClass);
-    
-    setTimeout(() => alertScreen.parentElement.classList.add('active'), 0);
-    button.addEventListener("click", () => {
+
+    console.log(alertScreen.parentElement.classList);
+    showModal(alertScreen.parentElement);
+    console.log(alertScreen.parentElement.classList);
+
+    button.addEventListener('click', () => {
         window.location.reload();
-    }, {once: true});
+    }, { once: true });
 }
 
 function toggle(event) {
@@ -158,8 +170,10 @@ function toggle(event) {
     }
 }
 
-cells.forEach(cell => {
-    if(cell.classList.contains('empty')) {
-        cell.addEventListener("click", toggle, {once: true})
+document.addEventListener('DOMContentLoaded', () => {
+  cells.forEach(cell => {
+    if (cell.classList.contains('empty')) {
+      cell.addEventListener('click', toggle, { once: true });
     }
-})
+  });
+});
